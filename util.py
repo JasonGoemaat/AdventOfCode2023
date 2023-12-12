@@ -1,4 +1,4 @@
-import os
+import os, inspect
 
 def add(a, b):
   return a+b
@@ -30,7 +30,7 @@ def do_puzzle(solver):
 #
 def test_solver(solver, input_file_name, expected = None):
   output_file_name = input_file_name.replace('.input', '.output')
-  with open(input_file_name) as f:
+  with open(os.getcwd() + '/data/' + input_file_name) as f:
     lines = f.read().splitlines()
   out = open(output_file_name, "w")
   result = solver(lines, out)
@@ -39,3 +39,24 @@ def test_solver(solver, input_file_name, expected = None):
   else:
     print(input_file_name + ' got ' + result + ' expected ' + expected)
     assert result == expected
+
+################################################################################
+# Best thing to use, automatically uses CWD and data subdir, accepts
+# an expected value.   If the solve function contains a parameter named
+# debug, a file will be created and passed for debug output.
+def test_solution(solve, input_file_name, expected = None):
+  with open(os.getcwd() + '/data/' + input_file_name) as f:
+    lines = f.read().splitlines()
+
+  if 'debug' in inspect.signature(solve).parameters:
+    debug_file_name = input_file_name.replace('.input', '.debug')
+    with open(os.getcwd() + '/data/' + debug_file_name, 'w') as debug_file: 
+      result = solve(lines, debug = debug_file)
+  else:
+    result = solve(lines)
+
+  if expected == None:
+    print(input_file_name, 'got', result)
+  else:
+    print(input_file_name, 'got', result, 'expected', expected)
+    assert str(result) == str(expected)

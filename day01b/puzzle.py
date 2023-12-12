@@ -1,7 +1,7 @@
 # much like the first puzzle, but the digits 0-9 can also be spelled out
-import sys
-sys.path.insert(0, '..')
-from util import do_puzzle, test_solver
+import sys, os
+sys.path.insert(0, os.getcwd() + '/..')
+from util import test_solver
 
 string_values = {
   '0': 0,

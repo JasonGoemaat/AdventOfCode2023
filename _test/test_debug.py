@@ -11,8 +11,8 @@ import sys
 #sys.path.insert(0, os.getcwd() + '/..') # for running in terminal from script dir
 sys.path.insert(0, os.path.dirname(__file__) + "/../")
 
-print('sys.path is:')
-print(sys.path)
+print('os.getcwd() is:', os.getcwd())
+print('sys.path is: ', sys.path)
 print('sys.executable is:' + sys.executable)
 print('__file__ is: ', __file__)
 print('os.path.dirname(__file__) is: ', os.path.dirname(__file__))
@@ -27,3 +27,5 @@ def solve(lines, out):
   return '281'
 
 test_solver(solve, data_dir+"test_day01b.input", '281')
+
+print('os.getcwd() is:', os.getcwd())
