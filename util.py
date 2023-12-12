@@ -20,7 +20,22 @@ def start_file(tuple):
     lines = f.read().splitlines()
   return (lines, open(_out, "w"))
 
+# this auto-processes all '.input' files in the data directory, and uses the form
+# that writes to the output
 def do_puzzle(solver):
   for f in get_inputs():
     (lines, out) = start_file(f)
     solver(lines, out)
+
+#
+def test_solver(solver, input_file_name, expected = None):
+  output_file_name = input_file_name.replace('.input', '.output')
+  with open(input_file_name) as f:
+    lines = f.read().splitlines()
+  out = open(output_file_name, "w")
+  result = solver(lines, out)
+  if expected == None:
+    print(input_file_name + ' got ' + result)
+  else:
+    print(input_file_name + ' got ' + result + ' expected ' + expected)
+    assert result == expected
