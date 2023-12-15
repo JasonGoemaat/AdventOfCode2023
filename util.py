@@ -60,3 +60,14 @@ def test_solution(solve, input_file_name, expected = None):
   else:
     print(input_file_name, 'got', result, 'expected', expected)
     assert str(result) == str(expected)
+
+
+class MyRange:
+  def __init__(self, start, end):
+    self.start = start
+    self.end = end
+
+class MyRangeSet:
+  def __init__(self):
+    self.ranges = []
+  
